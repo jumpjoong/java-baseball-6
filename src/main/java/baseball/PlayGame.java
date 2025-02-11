@@ -4,6 +4,7 @@ public class PlayGame {
   public ComputerNumber computerNumber;
   public PlayerNumber playerNumber;
 
+
   public PlayGame() {
     computerNumber = new ComputerNumber();
     playerNumber = new PlayerNumber();
@@ -14,18 +15,19 @@ public class PlayGame {
 
   public void play() {
     int[] test = computerNumber.getComputerNumber();
-    int ball = 0;
-    int strike = 0;
+
 
       while(true) {
         playerNumber.enterNumber();
         int[] test2 = playerNumber.getPlayerNumber();
-
+        int ball = 0;
+        int strike = 0;
 
         for (int i = 0; i < test.length; i++) {
           for (int j = 0; j < test2.length; j++) {
             if(test2[i] == test[i]) {
               strike++;
+              break;
             } else if (test2[j] == test[i]) {
               ball++;
               break;

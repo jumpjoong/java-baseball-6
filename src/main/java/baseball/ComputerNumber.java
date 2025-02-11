@@ -4,7 +4,7 @@ public class ComputerNumber {
     int[] computerNumber = new int[3];
 
     public int randomNumber() {
-        return (int) (Math.random() * 9);
+        return (int) (Math.random() * 10);
     }
 
     public void pushNumber() {
