@@ -15,6 +15,5 @@ public class RandomNumber {
         randomNumbers.add(randomNumber);
       }
     }
-    System.out.println(randomNumbers);
   }
 }
