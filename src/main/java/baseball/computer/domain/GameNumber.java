@@ -1,5 +1,7 @@
 package baseball.computer.domain;
 
+import baseball.user.EnterUserNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +14,16 @@ public class GameNumber {
   }
 
   public void duplicate(List<Integer> numberList) {
-    if (numberList.size() == numberList.stream().distinct().count()) {
-      System.out.println("중복이 아님");
-    } else {
-      System.out.println("중복");
+    EnterUserNumber enterUserNumber = new EnterUserNumber();
+    while (true) {
+      if (numberList.size() == numberList.stream().distinct().count()) {
+        //중복된 숫자가 없을 경우 게임 진행 코드
+        break;
+      } else {
+        System.out.println("중복된 숫자가 있습니다. 다시 입력해주세요.");
+        numberList.clear();
+        enterUserNumber.enterUserNumber();
+      }
     }
   }
 }

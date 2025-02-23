@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RandomNumber {
-  public List<Integer> randomNumber() {
-    List<Integer> computer = new ArrayList<>();
-
-    while (computer.size() < 3) {
+  public void randomNumber() {
+    List<Integer> randomNumbers = new ArrayList<>();
+    while (randomNumbers.size() < 3) {
       int randomNumber = Randoms.pickNumberInRange(1, 9);
-      if (!computer.contains(randomNumber)) {
-        computer.add(randomNumber);
+      if (!randomNumbers.contains(randomNumber)) {
+        randomNumbers.add(randomNumber);
       }
     }
-    return computer;
+    System.out.println(randomNumbers);
   }
 }
