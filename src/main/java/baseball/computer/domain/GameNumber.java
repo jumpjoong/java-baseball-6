@@ -9,7 +9,7 @@ public class GameNumber {
   EnterUserNumber enterUserNumber = new EnterUserNumber();
 
   public GameNumber(List<Integer> numberList) {
-    if(!validNumberRange(numberList)) {
+    if(!validNumberSize(numberList) || !validNumberRange(numberList)) {
       this.numberList = numberList;
       return;
     }
@@ -17,7 +17,7 @@ public class GameNumber {
     this.numberList = numberList;
   }
 
-  private void duplicate(List<Integer> numberList) {
+  private void duplicate(List<Integer> numberList) { //중복 숫자 검증
     while (true) {
       if (numberList.size() == numberList.stream().distinct().count()) {
         //중복된 숫자가 없을 경우 게임 진행 코드
@@ -30,15 +30,23 @@ public class GameNumber {
     }
   }
 
-  private boolean validNumberRange (List<Integer> numberList) {
+  private boolean validNumberRange (List<Integer> numberList) { //0과 9 숫자 검증
     for (int i = 0; i < numberList.size(); i++) {
       if (numberList.get(i) < 0 || numberList.get(i) > 9) {
         System.out.println("0과 9 사이의 번호를 입력해 주세요");
-        numberList.clear();
         enterUserNumber.enterUserNumber();
         return false;
       }
     }
     return true;
+  }
+
+  private boolean validNumberSize (List<Integer> numberList) {
+    if(numberList.size() == 3) {
+      return true;
+    }
+    System.out.println("3자리만 입력해주세요");
+    enterUserNumber.enterUserNumber();
+    return false;
   }
 }
