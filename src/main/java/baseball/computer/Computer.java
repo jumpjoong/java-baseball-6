@@ -1,7 +1,12 @@
 package baseball.computer;
 
+import java.util.List;
+
 public class Computer {
-  public void test () {
+  public List<Integer> ComputerNumber () {
+    RandomNumber randomNumber = new RandomNumber();
+
+    return randomNumber.randomNumber();
 
   }
 }
