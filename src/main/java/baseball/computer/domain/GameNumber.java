@@ -2,90 +2,84 @@ package baseball.computer.domain;
 
 import baseball.computer.Computer;
 import baseball.user.EnterUserNumber;
+import net.bytebuddy.implementation.bytecode.assign.reference.GenericTypeAwareAssigner;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class GameNumber {
   private final List<Integer> numberList;
-  EnterUserNumber enterUserNumber = new EnterUserNumber();
-
+  private final Computer computer;
 
   public GameNumber(List<Integer> numberList) {
-    if(!validNumberSize(numberList) || !validNumberRange(numberList)) {
-      this.numberList = numberList;
-      return;
-    }
-    duplicate(numberList);
-    this.numberList = numberList;
+    this.numberList = validateInput(numberList);
+    this.computer = new Computer();
   }
-  //중복 숫자 검증
-  private void duplicate(List<Integer> numberList) {
+
+  private List<Integer> validateInput(List<Integer> numberList) {
+    EnterUserNumber enterUserNumber = new EnterUserNumber();
+
     while (true) {
-      if (numberList.size() == numberList.stream().distinct().count()) {
-        //중복된 숫자가 없을 경우 게임 진행 코드
-        break;
+      if (!isValidSize(numberList)) {
+        System.out.println("❌ 숫자 3개만 입력해주세요");
+      } else if (!isValidRange(numberList)) {
+        System.out.println("❌ 0과 9 사이의 숫자만 입력해주세요.");
+      } else if (!duplicate(numberList)) {
+        System.out.println("❌ 중복된 숫자가 있습니다. 다시 입력해주세요.");
       } else {
-        System.out.println("중복된 숫자가 있습니다. 다시 입력해주세요.");
-        numberList.clear();
-        enterUserNumber.enterUserNumber();
+        return numberList;
       }
+      numberList = enterUserNumber.enterUserNumber().numberList;
     }
+  }
+
+  //중복 숫자 검증
+  private boolean duplicate(List<Integer> numberList) {
+    return numberList.size() == numberList.stream().distinct().count();
   }
   //0과 9 숫자 검증
-  private boolean validNumberRange (List<Integer> numberList) {
-    for (int i = 0; i < numberList.size(); i++) {
-      if (numberList.get(i) < 0 || numberList.get(i) > 9) {
-        System.out.println("0과 9 사이의 번호를 입력해 주세요");
-        enterUserNumber.enterUserNumber();
-        return false;
-      }
-    }
-    return true;
+  private boolean isValidRange(List<Integer> numberList) {
+    return numberList.stream().allMatch(num -> num >= 0 && num <= 9);
   }
   // 입력값 길이 검증
-  private boolean validNumberSize (List<Integer> numberList) {
-    if(numberList.size() == 3) {
-      return true;
-    }
-    System.out.println("3자리만 입력해주세요");
-    enterUserNumber.enterUserNumber();
-    return false;
+  private boolean isValidSize(List<Integer> numberList) {
+    return numberList.size() == 3;
   }
-  // 컴퓨터 숫자, 사용자 입력값 비교
-  public void compareNumber(List<Integer> numberList) {
-    Computer computer = new Computer();
-    int strike = 0;
-    int ball = 0;
-
+  //스트라이크 볼 관리
+  public void compareNumber() {
     List<Integer> computerNumber = computer.ComputerNumber(); // 컴퓨터 값
+    EnterUserNumber enterUserNumber = new EnterUserNumber();
+    int strike;
+    int ball;
 
-    while (true) {
-      for (int i = 0; i < computerNumber.size(); i++) {
-        for (int j = i + 1; j < numberList.size(); j++) {
-          if(Objects.equals(computerNumber.get(i), numberList.get(j))) {
+    do {
+      numberList = enterUserNumber.enterUserNumber().numberList;
+      strike = 0;
+      ball = 0;
+
+      for (int i = 0; i < numberList.size(); i++) {
+        for (int j = 0; j < computerNumber.size(); j++) {
+          if (numberList.get(i).equals(computerNumber.get(i))) {
             strike++;
-            break;
-          } else if (Objects.equals(numberList.get(j), computerNumber.get(i))) {
+          } else if (numberList.get(j).equals(computerNumber.get(i))) {
             ball++;
-            break;
           }
         }
       }
       if(strike == 0 && ball == 0) {
         System.out.println("낫싱");
-      } else if(strike > 0 && ball > 0) {
-        System.out.println(strike + "스트라이크" + ball + "볼");
-      } else if(strike > 0 && ball == 0) {
+      } else if (strike > 0 && ball == 0) {
         System.out.println(strike + "스트라이크");
-      } else if(strike == 0 && ball > 0) {
+      } else if (strike == 0 && ball > 0) {
         System.out.println(ball + "볼");
+      } else if (strike > 0 && ball > 0) {
+        System.out.println(strike + "스트라이크, " + ball + "볼" );
       }
-      if(strike == 3) {
-        System.out.println(strike + "개의 숫자를 모두 맞히셨습니다! 게임종료");
-        break;
-      }
+    } while(strike <= 3); {
+      System.out.println("정답입니다");
     }
+
   }
 }

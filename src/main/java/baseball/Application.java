@@ -12,9 +12,9 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-    Computer computer = new Computer();
-    EnterUserNumber test = new EnterUserNumber();
-    computer.ComputerNumber();
-    test.enterUserNumber();
+        EnterUserNumber enterUserNumber = new EnterUserNumber();
+        GameNumber gameNumber = enterUserNumber.enterUserNumber();  // ✅ `GameNumber` 객체 반환
+
+        gameNumber.compareNumber();  // ✅ 게임 실행
     }
 }

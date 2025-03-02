@@ -7,6 +7,5 @@ public class Computer {
     RandomNumber randomNumber = new RandomNumber();
 
     return randomNumber.randomNumber();
-
   }
 }
