@@ -11,6 +11,7 @@ public class EnterUserNumber {
 
   public GameNumber enterUserNumber (){
     String input = Console.readLine();
+    numberList.clear();
     for (int i = 0; i < input.length(); i++) {
       numberList.add(input.charAt(i) - '0');
     }
