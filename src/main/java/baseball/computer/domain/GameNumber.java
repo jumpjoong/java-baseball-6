@@ -1,7 +1,5 @@
 package baseball.computer.domain;
 
-import baseball.computer.Computer;
-
 import java.util.List;
 
 public class GameNumber {

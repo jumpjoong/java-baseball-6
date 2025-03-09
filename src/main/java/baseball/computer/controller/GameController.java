@@ -25,11 +25,11 @@ public class GameController {
   }
 
   private void reStart() {
-    while (true) {  // ✅ 사용자가 1 또는 2를 입력할 때까지 반복
+    while (true) {
       String input = Console.readLine();
 
       if (input.equals("1")) {
-        play();  // ✅ 게임 재시작
+        play();
         break;
       } else if (input.equals("2")) {
         System.out.println("게임을 종료합니다.");
