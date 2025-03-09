@@ -1,23 +1,18 @@
 package baseball.computer.domain;
 
-
 import baseball.computer.Computer;
 
 import java.util.List;
 
 public class GameNumber {
   private final List<Integer> numberList;
-  Computer computer = new Computer();
-  List<Integer> computerNumber = computer.ComputerNumber();
 
   public GameNumber(List<Integer> numberList) {
     validateInput(numberList);
     this.numberList = numberList;
-
   }
 
   private void validateInput(List<Integer> numberList) { //검증 후 에러 발생
-    System.out.println(numberList);
       if (!isValidSize(numberList)) {
         throw new IllegalArgumentException("❌ 숫자 3개만 입력해주세요");
       } else if (!isValidRange(numberList)) {
@@ -38,7 +33,8 @@ public class GameNumber {
   private boolean isValidSize(List<Integer> numberList) {
     return numberList.size() == 3;
   }//스트라이크 볼
-  public GameResult result() {
+  //스트라이크 볼 관리
+  public GameResult result(List<Integer> computerNumber) {
     int strike = 0;
     int ball = 0;
 
@@ -47,7 +43,7 @@ public class GameNumber {
         if(numberList.get(i).equals(computerNumber.get(i))) {
           strike++;
           break;
-        } else if (numberList.get(j).equals(computerNumber.get(i))) {
+        } else if (computerNumber.contains(numberList.get(i))) {
           ball++;
           break;
         }

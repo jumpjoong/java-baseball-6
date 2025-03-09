@@ -10,6 +10,7 @@ public class EnterUserNumber {
   List<Integer> numberList = new ArrayList<>();
 
   public GameNumber enterUserNumber (){
+    System.out.print("숫자를 입력해주세요 : ");
     String input = Console.readLine();
     numberList.clear();
     for (int i = 0; i < input.length(); i++) {
