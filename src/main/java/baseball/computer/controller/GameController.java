@@ -35,7 +35,7 @@ public class GameController {
         System.out.println("게임을 종료합니다.");
         break;
       } else {
-        System.out.println("잘못된 입력입니다. 1(재시작) 또는 2(종료)를 입력해주세요.");
+        throw new IllegalArgumentException("잘못된 입력입니다. 게임을 종료합니다.");
       }
     }
   }
