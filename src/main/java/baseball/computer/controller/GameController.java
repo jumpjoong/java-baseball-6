@@ -7,20 +7,29 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
+import static baseball.computer.config.ErrorMsg.INPUT_WRONG_NUMBER;
+import static baseball.computer.config.RuleMsg.*;
+
 public class GameController {
   private final EnterUserNumber enterUserNumber = new EnterUserNumber();
   private final Computer computer = new Computer();
+  private static final String restartKeyCode = "1";
+  private static final String stopKeyCode = "2";
   GameResult gameResult;
-  List<Integer> computerNumber = computer.computer();
+
+  public GameController() {
+    System.out.println(START_GAME_MSG.getMsg());
+  }
 
   public void play() {
-    System.out.println("숫자 야구 게임을 시작합니다.");
+    List<Integer> computerNumber = computer.computer();
+
     do {
       GameNumber gameNumber = enterUserNumber.enterUserNumber();
       gameResult = gameNumber.result(computerNumber);
       gameResult.print();
     } while (!gameResult.isWin());
-      System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료 \n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+      System.out.println(RESTART_GAME_MSG.getMsg());
       reStart();
   }
 
@@ -28,14 +37,14 @@ public class GameController {
     while (true) {
       String input = Console.readLine();
 
-      if (input.equals("1")) {
+      if (input.equals(restartKeyCode)) {
         play();
         break;
-      } else if (input.equals("2")) {
-        System.out.println("게임을 종료합니다.");
+      } else if (input.equals(stopKeyCode)) {
+        System.out.println(END_GAME_MSG.getMsg());
         break;
       } else {
-        throw new IllegalArgumentException("잘못된 입력입니다. 게임을 종료합니다.");
+        throw new IllegalArgumentException(INPUT_WRONG_NUMBER.getMsg());
       }
     }
   }
