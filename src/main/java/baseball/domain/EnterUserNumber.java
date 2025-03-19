@@ -1,13 +1,11 @@
-package baseball.user;
+package baseball.domain;
 
-import baseball.computer.domain.GameNumber;
 import camp.nextstep.edu.missionutils.Console;
-
-import static  baseball.computer.config.RuleMsg.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static baseball.config.RuleMsg.*;
 
 public class EnterUserNumber {
   List<Integer> numberList = new ArrayList<>();

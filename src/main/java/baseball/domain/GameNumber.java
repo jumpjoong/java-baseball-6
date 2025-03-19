@@ -1,8 +1,8 @@
-package baseball.computer.domain;
+package baseball.domain;
 
 import java.util.List;
 
-import static baseball.computer.config.ErrorMsg.*;
+import static baseball.config.ErrorMsg.*;
 
 public class GameNumber {
   private final List<Integer> numberList;

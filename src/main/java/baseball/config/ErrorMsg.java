@@ -1,4 +1,4 @@
-package baseball.computer.config;
+package baseball.config;
 
 public enum ErrorMsg {
     NUMBER_SIZE_ERROR("❌ 숫자 3개만 입력해주세요."),
